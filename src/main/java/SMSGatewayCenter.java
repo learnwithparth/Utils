@@ -14,13 +14,13 @@ public class SMSGatewayCenter{
 
         // this will convert any number sequence into 6 character.
         System.out.printf( "%04d", number);
-//        System.out.println(sendOTP("VDJ1muqjMtm6puO4",
-//                "is your One Time Password(OTP) for Merit Access. This OTP is valid till 120 sec - CHARUSAT",
-//                "CHRUST",
-//                "8320847007"));
+        System.out.println(sendOTPSms("VDJ1muqjMtm6puO4",
+                "1234 is your One Time Password(OTP) for Merit Access. This OTP is valid till 120 sec - CHARUSAT",
+                "CHRUST",
+                "9925020358"));
     }
 
-    public static String sendOTP(String api, String msg, String snd, String num) {
+    public static String sendOTPSms(String api, String msg, String snd, String num) {
         try {
             // Construct data
 
