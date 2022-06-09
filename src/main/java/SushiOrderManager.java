@@ -30,7 +30,7 @@ public class SushiOrderManager {
 
         for (int i = 0; i < 8; i++) {
             sushiItem = sushiOrderManager.nextItem();
-            ++sushiOrderManager.currentSeatId;
+            //++sushiOrderManager.currentSeatId;
             if (sushiItem != null)
                 System.out.println(sushiItem.getSeatId() + " " + sushiItem.getMenuItemId());
         }
@@ -67,25 +67,29 @@ public class SushiOrderManager {
     public SushiItem nextItem() {
         // System.out.println("Current Seat Id : " + currentSeatId);
         // for (int i = 0; i < request.size(); i++) {
-            
-            if (currentSeatId >= this.request.size()) 
+            ++currentSeatId;
+            if (currentSeatId > this.request.size()) 
                 currentSeatId = 1;
         System.out.println(
-                "Seat id is " + this.request.get(currentSeatId).getSeatId() + " current seat id is " + (currentSeatId + 1));
+                "Seat id is " + this.request.get(currentSeatId-1).getSeatId() + " current seat id is " + (currentSeatId ));
         // if (this.request.get(i).getSeatId() == currentSeatId) {
         // System.out.println("Reference of MenuItemsIds" +
         // this.request.get(i).getMenuItemIds().size());
-        if (this.request.get(currentSeatId).getMenuItemIds().size() > 0) {
-            menuItem = this.request.get(currentSeatId).getMenuItemIds().get(0);
+        if (this.request.get(currentSeatId-1).getMenuItemIds().size() > 0) {
+            menuItem = this.request.get(currentSeatId-1).getMenuItemIds().get(0);
             // System.out.println(this.request.get(i).getSeatId() + " " + menuItem);
-            this.request.get(currentSeatId).getMenuItemIds().remove(0);
+            this.request.get(currentSeatId-1).getMenuItemIds().remove(0);
+            int seatId = this.request.get(currentSeatId-1).getSeatId();
+            if(this.request.get(currentSeatId-1).getMenuItemIds().size()==0){
+                this.request.remove(currentSeatId-1);
+            }
             // System.out.println("Item left");
             // for (SushiOrder s : request)
             // System.out.print(s.seatId +" " + s.menuItemIds + "\t");
 
             // System.out.println();
 
-                return new SushiItem(this.request.get(currentSeatId).getSeatId()-1, menuItem);
+                return new SushiItem(seatId, menuItem);
             }
             
         
